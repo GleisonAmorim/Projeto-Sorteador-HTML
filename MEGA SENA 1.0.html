@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sorteio Mega-Sena</title>
+    <meta charset="UTF-8">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      
+      h1 {
+        text-align: center;
+      }
+      
+      button {
+        font-size: 1.2em;
+        margin-top: 1em;
+      }
+      
+      #numeros-sorteio {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 2em;
+      }
+      
+      .numero {
+        font-size: 1.5em;
+        font-weight: bold;
+        border: 1px solid black;
+        border-radius: 50%;
+        width: 3em;
+        height: 3em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0.5em;
+      }
+      
+      #numeros-anteriores {
+        margin-top: 2em;
+      }
+      
+      #numeros-anteriores h2 {
+        font-size: 1.2em;
+        margin-bottom: 0.5em;
+      }
+      
+      #numeros-anteriores ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      #numeros-anteriores li {
+        font-size: 1.2em;
+        margin-bottom: 0.5em;
+      }
+    </style>
+    <script type="text/javascript">
+      function sortearNumeros() {
+        var numeros = [];
+        var numerosEspeciais = [10, 53, 42, 5, 4, 33, 37, 23, 27, 30];
+        var probabilidadeEspecial = 0.2;
+        var i, j;
+        
+        // Sortear números normais
+        for (i = 0; i < 6; i++) {
+          var numero;
+          do {
+            numero = Math.floor(Math.random() * 60) + 1;
+          } while (numeros.indexOf(numero) != -1);
+          numeros.push(numero);
+        }
+        
+        // Sortear números especiais
+        for (i = 0; i < numerosEspeciais.length; i++) {
+          if (Math.random() < probabilidadeEspecial) {
+            do {
+              numero = numerosEspeciais[i];
+            } while (numeros.indexOf(numero) != -1);
+            numeros.push(numero);
+          }
+        }
+        
+        // Ordenar os números
+        numeros.sort(function(a, b) {
+          return a - b;
+        });
+        
+        // Exibir os números sorteados
+        var numerosSorteio = document.getElementById("numeros-sorteio");
+        numerosSorteio.innerHTML = "";
+        for (i = 0; i < 6; i++) {
+          var numeroElement = document.createElement("div");
+          numeroElement.classList.add("numero");
+          numeroElement.innerHTML = numeros[i];
+          numerosSorteio.appendChild(numeroElement);
+        }
+        
+        // Adicionar número sorteado à lista de números anteriores
+        var numerosAnteriores = document.getElementById("numeros-anteriores");
+        var numerosAnterioresList = numerosAnteriores.querySelector("ul");
+        var numerosAnterioresItem = document.createElement("li");
+        numerosAnterioresItem.innerHTML = numeros.slice(0, 6).join(", ");
+        numerosAnterioresList.insertBefore(numerosAnterioresItem, numerosAnterioresList.firstChild);
+  }
+</script>
+</head>
+<body>
+  <h1>Sorteio Mega-Sena</h1>
+  <button onclick="sortearNumeros()">Sortear</button>
+  <div id="numeros-sorteio"></div>
+  <div id="numeros-anteriores">
+    <h2>Números sorteados anteriormente:</h2>
+    <ul></ul>
+  </div>
+</body>
+</html>
