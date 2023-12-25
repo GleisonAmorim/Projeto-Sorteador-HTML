@@ -125,82 +125,94 @@
                 margin-bottom: 1em; /* Adicionar espaço entre as imagens */
             }
         }
+
+        footer {
+            background-color: #000; /* Fundo preto */
+            color: #fff; /* Texto branco */
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            color: #fff; /* Cor dos links */
+        }
     </style>
     <script type="text/javascript">
-        function sortearNumeros() {
-            var numeros = [];
-            var numerosEspeciais = [10, 53, 42, 5, 4, 33, 37, 23, 27, 30];
-            var probabilidadeEspecial = 0.2;
-            var i, j;
+      function sortearNumeros() {
+          var numeros = [];
+          var numerosEspeciais = [10, 53, 42, 5, 4, 33, 37, 23, 27, 30];
+          var probabilidadeEspecial = 0.2;
+          var i, j;
 
-            // Sortear números normais
-            for (i = 0; i < 6; i++) {
-                var numero;
-                do {
-                    numero = Math.floor(Math.random() * 60) + 1;
-                } while (numeros.indexOf(numero) !== -1);
-                numeros.push(numero);
-            }
+          // Sortear números normais
+          for (i = 0; i < 6; i++) {
+              var numero;
+              do {
+                  numero = Math.floor(Math.random() * 60) + 1;
+              } while (numeros.indexOf(numero) !== -1);
+              numeros.push(numero);
+          }
 
-            // Sortear números especiais
-            for (i = 0; i < numerosEspeciais.length; i++) {
-                if (Math.random() < probabilidadeEspecial) {
-                    var numeroEspecial = numerosEspeciais[i];
-                    if (numeros.indexOf(numeroEspecial) === -1) {
-                        numeros.push(numeroEspecial);
-                    }
-                }
-            }
+          // Sortear números especiais
+          for (i = 0; i < numerosEspeciais.length; i++) {
+              if (Math.random() < probabilidadeEspecial) {
+                  var numeroEspecial = numerosEspeciais[i];
+                  if (numeros.indexOf(numeroEspecial) === -1) {
+                      numeros.push(numeroEspecial);
+                  }
+              }
+          }
 
-            // Ordenar os números
-            numeros.sort(function(a, b) {
-                return a - b;
-            });
+          // Ordenar os números
+          numeros.sort(function(a, b) {
+              return a - b;
+          });
 
-            // Exibir os números sorteados
-            var numerosSorteio = document.getElementById("numeros-sorteio");
-            numerosSorteio.innerHTML = "";
-            for (i = 0; i < 6; i++) {
-                var numeroElement = document.createElement("div");
-                numeroElement.classList.add("numero");
-                numeroElement.innerHTML = numeros[i];
-                numerosSorteio.appendChild(numeroElement);
+          // Exibir os números sorteados
+          var numerosSorteio = document.getElementById("numeros-sorteio");
+          numerosSorteio.innerHTML = "";
+          for (i = 0; i < 6; i++) {
+              var numeroElement = document.createElement("div");
+              numeroElement.classList.add("numero");
+              numeroElement.innerHTML = numeros[i];
+              numerosSorteio.appendChild(numeroElement);
 
-                // Adicionando a classe "pulsar" para a animação
-                setTimeout(function() {
-                    numeroElement.classList.add("pulsar");
-                }, 100);
-            }
+              // Adicionando a classe "pulsar" para a animação
+              numeroElement.classList.add("pulsar");
+          }
 
-            // Adicionar número sorteado à lista de números anteriores
-            var numerosAnteriores = document.getElementById("numeros-anteriores");
-            var numerosAnterioresList = numerosAnteriores.querySelector("ul");
-            var numerosAnterioresItem = document.createElement("li");
-            numerosAnterioresItem.innerHTML = numeros.slice(0, 6).join(", ");
-            numerosAnterioresList.insertBefore(numerosAnterioresItem, numerosAnterioresList.firstChild);
-        }
+          // Adicionar número sorteado à lista de números anteriores
+          var numerosAnteriores = document.getElementById("numeros-anteriores");
+          var numerosAnterioresList = numerosAnteriores.querySelector("ul");
+          var numerosAnterioresItem = document.createElement("li");
+          numerosAnterioresItem.innerHTML = numeros.slice(0, 6).join(", ");
+          numerosAnterioresList.insertBefore(numerosAnterioresItem, numerosAnterioresList.firstChild);
+      }
 
-        // Função para adicionar imagens aleatórias
-        function adicionarImagensAleatorias() {
-            var imagens = [
-                'https://i.postimg.cc/G26RfTVx/images-removebg-preview.png',
-                'https://i.postimg.cc/hPSZBtnL/10433124-removebg-preview.png',
-                'https://i.postimg.cc/g2hZt37N/f5488f7af15452c26a5cd481f3501dfe-removebg-preview.png'
-            ];
+      // Função para adicionar imagens aleatórias
+      function adicionarImagensAleatorias() {
+          var imagens = [
+              'https://i.postimg.cc/G26RfTVx/images-removebg-preview.png',
+              'https://i.postimg.cc/hPSZBtnL/10433124-removebg-preview.png',
+              'https://i.postimg.cc/g2hZt37N/f5488f7af15452c26a5cd481f3501dfe-removebg-preview.png'
+          ];
 
-            var containerImagens = document.getElementById('imagens-aleatorias');
+          var containerImagens = document.getElementById('imagens-aleatorias');
 
-            for (var i = 0; i < imagens.length; i++) {
-                var imagem = document.createElement('img');
-                imagem.src = imagens[i];
-                imagem.className = 'imagem-aleatoria'; // Adicione uma classe para estilizar se necessário
-                containerImagens.appendChild(imagem);
-            }
-        }
+          for (var i = 0; i < imagens.length; i++) {
+              var imagem = document.createElement('img');
+              imagem.src = imagens[i];
+              imagem.className = 'imagem-aleatoria'; // Adicione uma classe para estilizar se necessário
+              containerImagens.appendChild(imagem);
+          }
+      }
 
-        // Chame a função de adicionar imagens aleatórias
-        adicionarImagensAleatorias();
-    </script>
+      // Chame a função de adicionar imagens aleatórias
+      adicionarImagensAleatorias();
+  </script>
 </head>
 <body>
     <div class="container">
@@ -214,5 +226,10 @@
         <!-- Adicionando imagens aleatórias -->
         <div id="imagens-aleatorias"></div>
     </div>
+    <footer>
+      <a href="https://github.com/GleisonAmorim" target="_blank">
+          <img src="https://img.shields.io/badge/GitHub-GleisonAmorim-green" alt="GitHub Badge">
+      </a>
+  </footer>
 </body>
 </html>
