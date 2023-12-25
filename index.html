@@ -47,6 +47,7 @@
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 2em;
+            transition: transform 0.5s ease-in-out; /* Adicionando transição para a transformação */
         }
 
         .numero {
@@ -62,12 +63,28 @@
             margin: 1em;
             background-color: #00ff00; /* Verde dinheiro */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s;
+            transition: box-shadow 0.3s, transform 0.3s; /* Adicionando transição para a sombra e a transformação */
             color: #000; /* Texto preto */
         }
 
         .numero:hover {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .numero.pulsar {
+            animation: pulsar 0.5s ease-in-out; /* Adicionando animação de pulsar */
+        }
+
+        @keyframes pulsar {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
         #numeros-anteriores {
@@ -148,6 +165,11 @@
                 numeroElement.classList.add("numero");
                 numeroElement.innerHTML = numeros[i];
                 numerosSorteio.appendChild(numeroElement);
+
+                // Adicionando a classe "pulsar" para a animação
+                setTimeout(function() {
+                    numeroElement.classList.add("pulsar");
+                }, 100);
             }
 
             // Adicionar número sorteado à lista de números anteriores
