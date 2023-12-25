@@ -5,11 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorteio Mega-Sena</title>
     <style>
-        body {
+      body {
             font-family: Arial, sans-serif;
             background-color: #000000;
             margin: 0;
             padding: 0;
+            overflow: hidden; /* Impede barras de rolagem */
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .animated-image {
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.8; /* Ajuste a opacidade conforme necessário */
+        }
+
+        .sifrao {
+            width: 100px; /* Ajuste o tamanho conforme necessário */
+            height: auto;
+            top: 30%;
+            left: 10%;
+        }
+
+        .moeda {
+            width: 80px; /* Ajuste o tamanho conforme necessário */
+            height: auto;
+            top: 50%;
+            left: 30%;
+        }
+
+        .tres-sifroes {
+            width: 120px; /* Ajuste o tamanho conforme necessário */
+            height: auto;
+            top: 70%;
+            left: 50%;
         }
 
         h1 {
@@ -92,22 +132,17 @@
             color: #00ff00; /* Verde dinheiro */
         }
 
-        @media only screen and (max-width: 600px) {
-            .container {
-                padding: 1em;
-            }
+        .container {
+        padding: 1em;
+    }
 
-            .numero {
-                width: 30%; /* Ajuste a largura conforme necessário */
-                height: 30%; /* Ajuste a altura conforme necessário */
-            }
+    .numero {
+        width: 40vw; /* Ajuste a largura conforme necessário */
+        height: 40vw; /* Ajuste a altura conforme necessário */
+        max-width: 4em; /* Defina um valor máximo para a largura */
+        max-height: 4em; /* Defina um valor máximo para a altura */
+    }
 
-            .imagem-aleatoria {
-                width: 100%; /* Tornar a imagem responsiva */
-                height: auto; /* Manter proporções */
-                margin-bottom: 1em; /* Adicionar espaço entre as imagens */
-            }
-        }
     </style>
     <script type="text/javascript">
         function sortearNumeros() {
@@ -181,6 +216,11 @@
     </script>
 </head>
 <body>
+  <body>
+    <img class="animated-image sifrao" src="https://i.postimg.cc/g2hZt37N/f5488f7af15452c26a5cd481f3501dfe-removebg-preview.png" alt="Sifrão">
+    <img class="animated-image moeda" src="https://i.postimg.cc/hPSZBtnL/10433124-removebg-preview.png" alt="Moeda">
+    <img class="animated-image tres-sifroes" src="https://i.postimg.cc/G26RfTVx/images-removebg-preview.png" alt="Três Sifrões">
+
     <div class="container">
         <h1>Sorteio Mega-Sena</h1>
         <button onclick="sortearNumeros()">Sortear</button>
