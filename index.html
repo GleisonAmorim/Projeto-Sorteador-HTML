@@ -7,22 +7,22 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #000000;
             margin: 0;
             padding: 0;
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            color: #00c74c;
             margin: 2em 0;
         }
 
         .container {
-            max-width: 90%; /* Alterado para ser responsivo */
+            max-width: 90%;
             margin: 0 auto;
             padding: 2em;
-            background-color: #fff;
+            background-color: #000; /* Fundo preto */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -31,7 +31,7 @@
             margin-top: 1em;
             padding: 0.5em 1em;
             background-color: #007bff;
-            color: #fff;
+            color: #000000;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -60,9 +60,10 @@
             justify-content: center;
             align-items: center;
             margin: 1em;
-            background-color: #fff;
+            background-color: #00ff00; /* Verde dinheiro */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: box-shadow 0.3s;
+            color: #000; /* Texto preto */
         }
 
         .numero:hover {
@@ -76,7 +77,7 @@
         #numeros-anteriores h2 {
             font-size: 1.2em;
             margin-bottom: 0.5em;
-            color: #333;
+            color: #00ff00; /* Verde dinheiro */
         }
 
         #numeros-anteriores ul {
@@ -88,7 +89,7 @@
         #numeros-anteriores li {
             font-size: 1.2em;
             margin-bottom: 0.5em;
-            color: #666;
+            color: #00ff00; /* Verde dinheiro */
         }
 
         @media only screen and (max-width: 600px) {
@@ -97,59 +98,86 @@
             }
 
             .numero {
-                width: 15%;
-                height: 15%;
+                width: 30%; /* Ajuste a largura conforme necessário */
+                height: 30%; /* Ajuste a altura conforme necessário */
+            }
+
+            .imagem-aleatoria {
+                width: 100%; /* Tornar a imagem responsiva */
+                height: auto; /* Manter proporções */
+                margin-bottom: 1em; /* Adicionar espaço entre as imagens */
             }
         }
     </style>
     <script type="text/javascript">
         function sortearNumeros() {
-        var numeros = [];
-        var numerosEspeciais = [10, 53, 42, 5, 4, 33, 37, 23, 27, 30];
-        var probabilidadeEspecial = 0.2;
-        var i, j;
+            var numeros = [];
+            var numerosEspeciais = [10, 53, 42, 5, 4, 33, 37, 23, 27, 30];
+            var probabilidadeEspecial = 0.2;
+            var i, j;
 
-        // Sortear números normais
-        for (i = 0; i < 6; i++) {
-          var numero;
-          do {
-            numero = Math.floor(Math.random() * 60) + 1;
-          } while (numeros.indexOf(numero) !== -1);
-          numeros.push(numero);
-        }
-
-        // Sortear números especiais
-        for (i = 0; i < numerosEspeciais.length; i++) {
-          if (Math.random() < probabilidadeEspecial) {
-            var numeroEspecial = numerosEspeciais[i];
-            if (numeros.indexOf(numeroEspecial) === -1) {
-              numeros.push(numeroEspecial);
+            // Sortear números normais
+            for (i = 0; i < 6; i++) {
+                var numero;
+                do {
+                    numero = Math.floor(Math.random() * 60) + 1;
+                } while (numeros.indexOf(numero) !== -1);
+                numeros.push(numero);
             }
-          }
+
+            // Sortear números especiais
+            for (i = 0; i < numerosEspeciais.length; i++) {
+                if (Math.random() < probabilidadeEspecial) {
+                    var numeroEspecial = numerosEspeciais[i];
+                    if (numeros.indexOf(numeroEspecial) === -1) {
+                        numeros.push(numeroEspecial);
+                    }
+                }
+            }
+
+            // Ordenar os números
+            numeros.sort(function(a, b) {
+                return a - b;
+            });
+
+            // Exibir os números sorteados
+            var numerosSorteio = document.getElementById("numeros-sorteio");
+            numerosSorteio.innerHTML = "";
+            for (i = 0; i < 6; i++) {
+                var numeroElement = document.createElement("div");
+                numeroElement.classList.add("numero");
+                numeroElement.innerHTML = numeros[i];
+                numerosSorteio.appendChild(numeroElement);
+            }
+
+            // Adicionar número sorteado à lista de números anteriores
+            var numerosAnteriores = document.getElementById("numeros-anteriores");
+            var numerosAnterioresList = numerosAnteriores.querySelector("ul");
+            var numerosAnterioresItem = document.createElement("li");
+            numerosAnterioresItem.innerHTML = numeros.slice(0, 6).join(", ");
+            numerosAnterioresList.insertBefore(numerosAnterioresItem, numerosAnterioresList.firstChild);
         }
 
-        // Ordenar os números
-        numeros.sort(function(a, b) {
-          return a - b;
-        });
+        // Função para adicionar imagens aleatórias
+        function adicionarImagensAleatorias() {
+            var imagens = [
+                'https://i.postimg.cc/G26RfTVx/images-removebg-preview.png',
+                'https://i.postimg.cc/hPSZBtnL/10433124-removebg-preview.png',
+                'https://i.postimg.cc/g2hZt37N/f5488f7af15452c26a5cd481f3501dfe-removebg-preview.png'
+            ];
 
-        // Exibir os números sorteados
-        var numerosSorteio = document.getElementById("numeros-sorteio");
-        numerosSorteio.innerHTML = "";
-        for (i = 0; i < 6; i++) {
-          var numeroElement = document.createElement("div");
-          numeroElement.classList.add("numero");
-          numeroElement.innerHTML = numeros[i];
-          numerosSorteio.appendChild(numeroElement);
+            var containerImagens = document.getElementById('imagens-aleatorias');
+
+            for (var i = 0; i < imagens.length; i++) {
+                var imagem = document.createElement('img');
+                imagem.src = imagens[i];
+                imagem.className = 'imagem-aleatoria'; // Adicione uma classe para estilizar se necessário
+                containerImagens.appendChild(imagem);
+            }
         }
 
-        // Adicionar número sorteado à lista de números anteriores
-        var numerosAnteriores = document.getElementById("numeros-anteriores");
-        var numerosAnterioresList = numerosAnteriores.querySelector("ul");
-        var numerosAnterioresItem = document.createElement("li");
-        numerosAnterioresItem.innerHTML = numeros.slice(0, 6).join(", ");
-        numerosAnterioresList.insertBefore(numerosAnterioresItem, numerosAnterioresList.firstChild);
-      }
+        // Chame a função de adicionar imagens aleatórias
+        adicionarImagensAleatorias();
     </script>
 </head>
 <body>
@@ -161,6 +189,8 @@
             <h2>Números sorteados anteriormente:</h2>
             <ul></ul>
         </div>
+        <!-- Adicionando imagens aleatórias -->
+        <div id="imagens-aleatorias"></div>
     </div>
 </body>
 </html>
