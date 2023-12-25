@@ -55,8 +55,8 @@
             font-weight: bold;
             border: 2px solid #007bff;
             border-radius: 50%;
-            width: 4em;
-            height: 4em;
+            width: 8vw; /* Alterado para usar largura relativa à largura da tela */
+            height: 8vw; /* Alterado para usar altura relativa à largura da tela */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -115,9 +115,21 @@
             }
 
             .numero {
-                width: 30%; /* Ajuste a largura conforme necessário */
-                height: 30%; /* Ajuste a altura conforme necessário */
-            }
+            font-size: 2em;
+            font-weight: bold;
+            border: 2px solid #007bff;
+            border-radius: 50%;
+            width: 8vw; /* Alterado para usar largura relativa à largura da tela */
+            height: 8vw; /* Alterado para usar altura relativa à largura da tela */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1em;
+            background-color: #00ff00; /* Verde dinheiro */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s, transform 0.3s; /* Adicionando transição para a sombra e a transformação */
+            color: #000; /* Texto preto */
+        }
 
             .imagem-aleatoria {
                 width: 100%; /* Tornar a imagem responsiva */
