@@ -22,7 +22,7 @@
             max-width: 90%;
             margin: 0 auto;
             padding: 2em;
-            background-color: #000; /* Fundo preto */
+            background-color: #000;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -47,25 +47,24 @@
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 2em;
-            transition: transform 0.5s ease-in-out; /* Adicionando transição para a transformação */
+            transition: transform 0.5s ease-in-out;
         }
 
         .numero {
-            font-size: 2.5em; /* Ajustado para um tamanho um pouco maior */
+            font-size: 2.5em;
             font-weight: bold;
             border: 2px solid #007bff;
             border-radius: 50%;
-            width: 10vw; /* Ajustado para um tamanho um pouco maior */
-            height: 10vw; /* Ajustado para um tamanho um pouco maior */
+            width: 10vw;
+            height: 10vw;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 1em;
-            background: #00ff00; /* Verde dinheiro */
-            background: linear-gradient(to right, #00ff00, #007bff); /* Gradiente de verde para azul */
+            background: linear-gradient(to right, #00ff00, #007bff);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s, transform 0.3s; /* Adicionando transição para a sombra e a transformação */
-            color: #000; /* Texto preto */
+            transition: box-shadow 0.3s, transform 0.3s;
+            color: #000;
         }
 
         .numero:hover {
@@ -73,19 +72,13 @@
         }
 
         .numero.pulsar {
-            animation: pulsar 0.5s ease-in-out; /* Adicionando animação de pulsar */
+            animation: pulsar 0.5s ease-in-out;
         }
 
         @keyframes pulsar {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.2);
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
 
         #numeros-anteriores {
@@ -95,7 +88,7 @@
         #numeros-anteriores h2 {
             font-size: 1.2em;
             margin-bottom: 0.5em;
-            color: #00ff00; /* Verde dinheiro */
+            color: #00ff00;
         }
 
         #numeros-anteriores ul {
@@ -107,42 +100,31 @@
         #numeros-anteriores li {
             font-size: 1.2em;
             margin-bottom: 0.5em;
-            color: #00ff00; /* Verde dinheiro */
+            color: #00ff00;
         }
 
         @media only screen and (max-width: 600px) {
+
             .container {
                 padding: 1em;
             }
 
             .numero {
-            font-size: 2.5em; /* Ajustado para um tamanho um pouco maior */
-            font-weight: bold;
-            border: 2px solid #007bff;
-            border-radius: 50%;
-            width: 10vw; /* Ajustado para um tamanho um pouco maior */
-            height: 10vw; /* Ajustado para um tamanho um pouco maior */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 1em;
-            background: #00ff00; /* Verde dinheiro */
-            background: linear-gradient(to right, #00ff00, #007bff); /* Gradiente de verde para azul */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s, transform 0.3s; /* Adicionando transição para a sombra e a transformação */
-            color: #000; /* Texto preto */
-        }
+                width: 18vw;
+                height: 18vw;
+                font-size: 2em;
+            }
 
             .imagem-aleatoria {
-                width: 100%; /* Tornar a imagem responsiva */
-                height: auto; /* Manter proporções */
-                margin-bottom: 1em; /* Adicionar espaço entre as imagens */
+                width: 100%;
+                height: auto;
+                margin-bottom: 1em;
             }
         }
 
         footer {
-            background-color: #000; /* Fundo preto */
-            color: #fff; /* Texto branco */
+            background-color: #000;
+            color: #fff;
             text-align: center;
             padding: 1em;
             position: fixed;
@@ -150,106 +132,99 @@
             width: 100%;
         }
 
-        footer a {
-            color: #fff; /* Cor dos links */
-        }
+        footer a { color: #fff; }
     </style>
+
     <script type="text/javascript">
-      function sortearNumeros() {
-          var numeros = [];
-          var numerosEspeciais = [10, 53, 42, 5, 4, 33, 37, 23, 27, 30];
-          var probabilidadeEspecial = 0.2;
-          var i, j;
 
-          // Sortear números normais
-          for (i = 0; i < 6; i++) {
-              var numero;
-              do {
-                  numero = Math.floor(Math.random() * 60) + 1;
-              } while (numeros.indexOf(numero) !== -1);
-              numeros.push(numero);
-          }
+        // NÍVEIS DE PESO
+        const nivelA = [5, 10, 23, 33, 53, 4, 27, 42, 37, 30]; // peso 3
+        const nivelB = [54, 24, 28, 44, 17, 52, 32, 29, 36, 41]; // peso 2
 
-          // Sortear números especiais
-          for (i = 0; i < numerosEspeciais.length; i++) {
-              if (Math.random() < probabilidadeEspecial) {
-                  var numeroEspecial = numerosEspeciais[i];
-                  if (numeros.indexOf(numeroEspecial) === -1) {
-                      numeros.push(numeroEspecial);
-                  }
-              }
-          }
+        // Criar pool ponderado
+        let pool = [];
 
-          // Ordenar os números
-          numeros.sort(function(a, b) {
-              return a - b;
-          });
+        nivelA.forEach(n => pool.push(n, n, n));  // peso 3
+        nivelB.forEach(n => pool.push(n, n));     // peso 2
 
-          // Exibir os números sorteados
-          var numerosSorteio = document.getElementById("numeros-sorteio");
-          numerosSorteio.innerHTML = "";
-          for (i = 0; i < 6; i++) {
-              var numeroElement = document.createElement("div");
-              numeroElement.classList.add("numero");
-              numeroElement.innerHTML = numeros[i];
-              numerosSorteio.appendChild(numeroElement);
+        for (let i = 1; i <= 60; i++) {
+            if (!nivelA.includes(i) && !nivelB.includes(i)) {
+                pool.push(i); // peso 1
+            }
+        }
 
-              // Adicionando a classe "pulsar" para a animação
-              numeroElement.classList.add("pulsar");
-          }
+        function sortearNumeros() {
 
-          // Adicionar número sorteado à lista de números anteriores
-          var numerosAnteriores = document.getElementById("numeros-anteriores");
-          var numerosAnterioresList = numerosAnteriores.querySelector("ul");
-          var numerosAnterioresItem = document.createElement("li");
-          numerosAnterioresItem.innerHTML = numeros.slice(0, 6).join(", ");
-          numerosAnterioresList.insertBefore(numerosAnterioresItem, numerosAnterioresList.firstChild);
-      }
+            let resultado = [];
 
-      // Função para adicionar imagens aleatórias
-      function adicionarImagensAleatorias() {
-          var imagens = [
-              'https://i.postimg.cc/G26RfTVx/images-removebg-preview.png',
-              'https://i.postimg.cc/hPSZBtnL/10433124-removebg-preview.png',
-              'https://i.postimg.cc/g2hZt37N/f5488f7af15452c26a5cd481f3501dfe-removebg-preview.png'
-          ];
+            while (resultado.length < 6) {
+                let n = pool[Math.floor(Math.random() * pool.length)];
+                if (!resultado.includes(n)) resultado.push(n);
+            }
 
-          var containerImagens = document.getElementById('imagens-aleatorias');
+            resultado.sort((a, b) => a - b);
 
-          for (var i = 0; i < imagens.length; i++) {
-              var imagem = document.createElement('img');
-              imagem.src = imagens[i];
-              imagem.className = 'imagem-aleatoria'; // Adicione uma classe para estilizar se necessário
-              containerImagens.appendChild(imagem);
-          }
-      }
+            // EXIBIR NÚMEROS
+            const numerosSorteio = document.getElementById("numeros-sorteio");
+            numerosSorteio.innerHTML = "";
 
-      // Chame a função de adicionar imagens aleatórias
-      adicionarImagensAleatorias();
-  </script>
+            resultado.forEach(num => {
+                const elemento = document.createElement("div");
+                elemento.classList.add("numero", "pulsar");
+                elemento.textContent = num;
+                numerosSorteio.appendChild(elemento);
+            });
+
+            // HISTÓRICO
+            const lista = document.querySelector("#numeros-anteriores ul");
+            const item = document.createElement("li");
+            item.textContent = resultado.join(", ");
+            lista.prepend(item);
+        }
+
+        function adicionarImagensAleatorias() {
+
+            const imagens = [
+                'https://i.postimg.cc/G26RfTVx/images-removebg-preview.png',
+                'https://i.postimg.cc/hPSZBtnL/10433124-removebg-preview.png',
+                'https://i.postimg.cc/g2hZt37N/f5488f7af15452c26a5cd481f3501dfe-removebg-preview.png'
+            ];
+
+            const containerImagens = document.getElementById('imagens-aleatorias');
+
+            imagens.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = 'imagem-aleatoria';
+                containerImagens.appendChild(img);
+            });
+        }
+
+        adicionarImagensAleatorias();
+    </script>
+
 </head>
 <body>
     <div class="container">
         <h1>Sorteio Mega-Sena</h1>
         <button onclick="sortearNumeros()">Sortear</button>
+
         <div id="numeros-sorteio"></div>
+
         <div id="numeros-anteriores">
             <h2>Números sorteados anteriormente:</h2>
             <ul></ul>
         </div>
-        <!-- Adicionando imagens aleatórias -->
+
         <div id="imagens-aleatorias"></div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
+    <br><br><br><br><br><br>
+
     <footer>
-      <a href="https://github.com/GleisonAmorim" target="_blank">
-          <img src="https://img.shields.io/badge/GitHub-GleisonAmorim-green" alt="GitHub Badge">
-      </a>
-  </footer>
+        <a href="https://github.com/GleisonAmorim" target="_blank">
+            <img src="https://img.shields.io/badge/GitHub-GleisonAmorim-green">
+        </a>
+    </footer>
 </body>
 </html>
